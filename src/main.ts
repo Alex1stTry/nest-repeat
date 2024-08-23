@@ -1,11 +1,17 @@
-import { ValidationPipe } from '@nestjs/common';
+import { Logger, ValidationPipe } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
+import { AppConfig } from './config/config-type';
 import { AppModule } from './modules/app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  const configService = app.get(ConfigService);
+  const appConfig = configService.get<AppConfig>('app');
+
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
@@ -34,6 +40,9 @@ async function bootstrap() {
     },
   });
 
-  await app.listen(3000);
+  await app.listen(appConfig.port, () => {
+    Logger.log(`Server started on ${appConfig.host}:${appConfig.port}`);
+    Logger.log(`Swagger started on ${appConfig.host}:${appConfig.port}/docs`);
+  });
 }
 bootstrap();
