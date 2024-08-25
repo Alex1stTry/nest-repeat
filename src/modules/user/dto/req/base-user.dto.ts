@@ -15,4 +15,7 @@ export class BaseUserDto {
 
   @ApiProperty({ required: false })
   phone?: string;
+
+  @ApiProperty({ default: false })
+  isVerified: boolean;
 }
