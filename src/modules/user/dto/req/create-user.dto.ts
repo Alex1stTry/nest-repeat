@@ -56,4 +56,15 @@ export class CreateUserDto {
   @ApiProperty({ required: false })
   @IsOptional()
   public readonly phone?: string;
+
+  @ApiProperty()
+  @IsString()
+  @Transform(TransformHelper.trim)
+  @IsOptional()
+  bio?: string;
+
+  @ApiProperty()
+  @IsString()
+  @IsOptional()
+  image?: string;
 }

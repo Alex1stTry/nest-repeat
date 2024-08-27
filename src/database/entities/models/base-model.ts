@@ -9,8 +9,8 @@ export class BaseModel {
   id: string;
 
   @CreateDateColumn()
-  created: Date;
+  createdAt: Date;
 
   @UpdateDateColumn()
-  updated: Date;
+  updatedAt: Date;
 }

@@ -13,8 +13,14 @@ export class BaseUserDto {
   @ApiProperty()
   age: number;
 
-  @ApiProperty({ required: false })
+  @ApiProperty()
   phone?: string;
+
+  @ApiProperty({ required: false })
+  bio?: string;
+
+  @ApiProperty({ required: false })
+  image?: string;
 
   @ApiProperty({ default: false })
   isVerified: boolean;
