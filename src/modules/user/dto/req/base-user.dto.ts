@@ -1,19 +1,16 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 export class BaseUserDto {
-  @ApiProperty()
+  id: string;
+
   name: string;
 
-  @ApiProperty()
   email: string;
 
-  @ApiProperty()
   password: string;
 
-  @ApiProperty()
   age: number;
 
-  @ApiProperty()
   phone?: string;
 
   @ApiProperty({ required: false })

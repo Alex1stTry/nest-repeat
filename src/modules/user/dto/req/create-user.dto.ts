@@ -27,18 +27,18 @@ export class CreateUserDto {
   @IsString()
   @IsEmail()
   @Transform(TransformHelper.trim)
-  @Matches(regexConstants.EMAIL)
+  @Matches(regexConstants.EMAIL, { message: 'Incorrect email' })
   public readonly email: string;
 
   @ApiProperty()
-  @IsString()
-  @Transform(TransformHelper.trim)
   @Matches(regexConstants.PASSWORD, {
     message:
       'at least one letter (either uppercase or lowercase),' +
       'at least one digit, at least one special character from the set @$!%_*#?&,' +
       'at least 8 characters long',
   })
+  @IsString()
+  @Transform(TransformHelper.trim)
   public readonly password: string;
 
   @ApiProperty()

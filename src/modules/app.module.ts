@@ -4,8 +4,11 @@ import { APP_FILTER } from '@nestjs/core';
 
 import { GlobalExceptionFilter } from '../common/http/http-exception.filter';
 import configuration from '../config/configuration';
+import { AuthModule } from './auth/auth.module';
 import { LoggerModule } from './logger/logger.module';
 import { PostgresModule } from './postgres/postgres.module';
+import { RedisModule } from './redis/redis.module';
+import { RepositoryModule } from './repository/repository.module';
 import { UserModule } from './user/user.module';
 
 @Module({
@@ -17,6 +20,9 @@ import { UserModule } from './user/user.module';
     UserModule,
     PostgresModule,
     LoggerModule,
+    RepositoryModule,
+    RedisModule,
+    AuthModule,
   ],
   providers: [
     {

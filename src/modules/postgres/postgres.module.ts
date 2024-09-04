@@ -29,7 +29,14 @@ import { ConfigType, PostgresConfig } from '../../config/config-type';
               '*.entity.js',
             ),
           ],
-          migrations: [],
+          migrations: [
+            path.join(),
+            'dist',
+            'src',
+            'database',
+            'migrations',
+            '*.js',
+          ],
           migrationsRun: true,
           synchronize: false,
         };

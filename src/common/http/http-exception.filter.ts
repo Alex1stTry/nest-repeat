@@ -1,5 +1,6 @@
 import {
   ArgumentsHost,
+  BadRequestException,
   Catch,
   ExceptionFilter,
   HttpException,
@@ -20,7 +21,10 @@ export class GlobalExceptionFilter implements ExceptionFilter {
     let status: number;
     let message: string | string[];
 
-    if (exception instanceof HttpException) {
+    if (exception instanceof BadRequestException) {
+      status = exception.getStatus();
+      message = (exception.getResponse() as any).message;
+    } else if (exception instanceof HttpException) {
       status = exception.getStatus();
       message = exception.message;
     } else {
@@ -28,6 +32,8 @@ export class GlobalExceptionFilter implements ExceptionFilter {
       message = 'Internal server error';
     }
     this.logger.error(exception);
+
+    message = Array.isArray(message) ? message : [message];
 
     response.status(status).json({
       statusCode: status,
