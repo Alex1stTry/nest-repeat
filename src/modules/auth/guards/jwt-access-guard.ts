@@ -7,6 +7,7 @@ import {
 import { Reflector } from '@nestjs/core';
 
 import { UsersRepository } from '../../repository/services/users.repository';
+import { UserMapper } from '../../user/presenter/user.mapper';
 import { TokenType } from '../enums/token-type.enum';
 import { AuthCacheService } from '../services/auth-cache.service';
 import { TokenService } from '../services/token.service';
@@ -52,11 +53,7 @@ export class JwtAccessGuard implements CanActivate {
 
     const user = await this.userRepository.findOneBy({ id: payload.userId });
 
-    request.user = {
-      userId: payload.userId,
-      deviceId: payload.deviceId,
-      email: user.email,
-    };
+    request.user = UserMapper.toUserData(user, payload);
     return true;
   }
 }

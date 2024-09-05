@@ -15,11 +15,10 @@ export class AuthCacheService {
   }
   public async saveAccess(
     token: string,
-    deviceId: string,
     userId: string,
+    deviceId: string,
   ): Promise<void> {
     const key = this.getKey(userId, deviceId);
-
     await this.redisService.deleteByKey(key);
     await this.redisService.addOneToSet(key, token);
     await this.redisService.expire(key, this.jwtConfig.refreshExpireIn);

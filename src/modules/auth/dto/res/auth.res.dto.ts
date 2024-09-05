@@ -1,7 +1,7 @@
-import { ResPrivateUserDto } from '../../../user/dto/res/res-private-user.dto';
+import { UserEntity } from '../../../../database/entities/user.entity';
 import { TokenPairResDto } from './token-pair.res.dto';
 
 export class AuthResDto {
-  user: ResPrivateUserDto;
+  user: UserEntity;
   tokens: TokenPairResDto;
 }

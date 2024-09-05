@@ -19,6 +19,7 @@ import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { IUserData } from '../auth/interfaces/user-data.interface';
 import { ResPrivateUserDto } from './dto/res/res-private-user.dto';
 import { ResPublicUserDto } from './dto/res/res-public-user.dto';
+import { UserMapper } from './presenter/user.mapper';
 import { UserService } from './user.service';
 
 @ApiTags('Users')
@@ -33,7 +34,8 @@ export class UserController {
   public async getMe(
     @CurrentUser() userData: IUserData,
   ): Promise<ResPrivateUserDto> {
-    return await this.userService.getMe(userData);
+    const user = await this.userService.getMe(userData);
+    return UserMapper.toPrivateDto(user);
   }
 
   @ApiBearerAuth()
