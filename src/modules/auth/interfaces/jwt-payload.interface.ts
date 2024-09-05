@@ -1,4 +1,4 @@
 export interface IJwtPayload {
-  id: string;
+  userId: string;
   deviceId: string;
 }
